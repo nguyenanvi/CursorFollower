@@ -1,0 +1,30 @@
+body {
+    height: 100vh;
+    margin: 0;
+    background-color: #fff;
+    overflow: hidden;
+    cursor: none;
+}
+
+img {
+    position: absolute;
+    width: 54px;
+    height: 54px;
+    transition: transform 0.05s linear;
+    z-index: 990;
+}
+button {
+    position: fixed;
+    top: 10px;
+    right: 34px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 999;
+}
+
+button img {
+    width: 24px;
+    height: 24px;
+}

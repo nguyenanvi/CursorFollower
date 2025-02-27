@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Image Follows Cursor</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            background-color: #fff;
+            overflow: hidden;
+            cursor: none;
+        }
+        img {
+            position: absolute;
+            width: 54px;
+            height: 54px;
+            transition: transform 0.05s linear;
+        }
+    </style>
+</head>
+<body>
+    <img id="follow-img" src="img/33.jpeg" alt="Follow Image">
+
+    <script>
+        const img = document.getElementById('follow-img');
+        let lastX = window.innerWidth / 2;
+        let lastY = window.innerHeight / 2;
+        let lastTime = Date.now();
+        let lastDirection = null;
+
+        const images = [
+            ["11", "12", "13", "14", "15"],
+            ["21", "22", "23", "24", "25"],
+            ["31", "32", "33", "34", "35"],
+            ["41", "42", "43", "44", "45"],
+            ["51", "52", "53", "54", "55"]
+        ];
+
+        function getImageBasedOnSpeedAndDirection(speed, direction) {
+            const speedFactor = Math.min(Math.floor(speed / 0.1), 4);
+
+            // Calculate direction offsets
+            const xOffset = Math.round(Math.cos(direction * Math.PI / 180) * speedFactor);
+            const yOffset = Math.round(Math.sin(direction * Math.PI / 180) * speedFactor);
+
+            // Adjust indices based on offsets
+            const x = 2 + xOffset; // Center index 2 corresponds to '33'
+            const y = 2 + yOffset;
+
+            // Clamp indices within grid boundaries
+            const clampedX = Math.min(Math.max(x, 0), 4);
+            const clampedY = Math.min(Math.max(y, 0), 4);
+
+            return `img/${images[clampedY][clampedX]}.jpeg`;
+        }
+
+        document.addEventListener('mousemove', (event) => {
+            const currentTime = Date.now();
+            const deltaX = event.clientX - lastX;
+            const deltaY = event.clientY - lastY;
+            const deltaTime = currentTime - lastTime;
+
+            // Avoid division by zero
+            if (deltaTime === 0) return;
+
+            const speed = Math.sqrt(deltaX * deltaX + deltaY * deltaY) / deltaTime;
+            const direction = Math.atan2(deltaY, deltaX) * 180 / Math.PI;
+
+            // Direction change threshold in degrees
+            const directionThreshold = 10; // Adjust this value as needed
+
+            // Check if the direction change is significant
+            if (lastDirection !== null) {
+                const directionChange = Math.abs(direction - lastDirection);
+                if (directionChange < directionThreshold) {
+                    // Direction hasn't changed significantly; use the last direction
+                    img.style.transform = `translate(${event.clientX - 27}px, ${event.clientY - 27}px)`;
+
+                    lastX = event.clientX;
+                    lastY = event.clientY;
+                    lastTime = currentTime;
+                    return; // Skip updating the image
+                }
+            }
+
+            img.style.transform = `translate(${event.clientX - 27}px, ${event.clientY - 27}px)`;
+            img.src = getImageBasedOnSpeedAndDirection(speed, direction);
+
+            lastX = event.clientX;
+            lastY = event.clientY;
+            lastTime = currentTime;
+            lastDirection = direction;
+        });
+    </script>
+</body>
+</html>
