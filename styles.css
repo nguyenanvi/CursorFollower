@@ -28,3 +28,15 @@ button img {
     width: 24px;
     height: 24px;
 }
+a#credit{
+    display: inline-block;
+    width: 12ch;
+    text-align: center;
+
+    position: fixed;
+    bottom: 10px;
+    left: calc(50% - 6ch);
+    z-index: 999;
+    font-size: 20px;
+    color: gray;
+}

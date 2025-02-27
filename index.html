@@ -12,5 +12,18 @@
         <img src="img/fullscreen.ico" alt="Fullscreen Icon">
     </button>
     <script src="script.js"></script>
+    <a id="credit" href="https://github.com/nguyenanvi" target="_blank">@nguyenanvi</a>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered with scope:', registration.scope);
+                    }, (err) => {
+                        console.log('Service Worker registration failed:', err);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>

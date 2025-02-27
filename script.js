@@ -56,6 +56,7 @@ document.addEventListener('mousemove', (event) => {
     lastTime = currentTime;
     lastDirection = direction;
 });
+
 document.getElementById('fullscreen-btn').addEventListener('click', () => {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
@@ -65,3 +66,24 @@ document.getElementById('fullscreen-btn').addEventListener('click', () => {
         }
     }
 });
+
+// Zooming functionality
+let imgSize = 54;
+const minSize = 20;
+const maxSize = 200;
+const zoomFactor = 10;
+
+function zoomImage(event) {
+    event.preventDefault();
+    if (event.deltaY < 0) {
+        // Zoom in
+        imgSize = Math.min(maxSize, imgSize + zoomFactor);
+    } else {
+        // Zoom out
+        imgSize = Math.max(minSize, imgSize - zoomFactor);
+    }
+    img.style.width = `${imgSize}px`;
+    img.style.height = `${imgSize}px`;
+}
+
+document.addEventListener('wheel', zoomImage);
