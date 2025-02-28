@@ -22,15 +22,13 @@ window.onload = () => {
     ];
 
     // Preload all images
-    function preloadImages() {
+    (function () {
         images.flat().forEach(imgName => {
             const img = new Image();
             img.src = `img/${imgName}.jpeg`;
             preloadedImages[imgName] = img;
         });
-    }
-
-    preloadImages();
+    })()
 
     function getImageBasedOnSpeedAndDirection(speed, direction) {
         const speedFactor = Math.min(Math.floor(speed / 0.1), 4);
@@ -69,6 +67,9 @@ window.onload = () => {
     function handleCursorMove(x, y, isObjectMode) {
         const currentTime = Date.now();
         const deltaTime = currentTime - lastTime;
+
+        console.log(preloadedImages);
+        
 
         let deltaX, deltaY;
         if (isObjectMode) {
