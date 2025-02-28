@@ -4,39 +4,62 @@ body {
     background-color: #fff;
     overflow: hidden;
     cursor: none;
-}
-
-img {
+  }
+  
+  img {
     position: absolute;
     width: 54px;
     height: 54px;
     transition: transform 0.05s linear;
     z-index: 990;
-}
-button {
+  }
+  button {
     position: fixed;
-    top: 10px;
-    right: 34px;
     background: none;
     border: none;
     cursor: pointer;
     padding: 0;
     z-index: 999;
-}
-
-button img {
+  }
+  
+  button img {
     width: 24px;
     height: 24px;
-}
-a#credit{
+  }
+  a#credit {
     display: inline-block;
     width: 12ch;
     text-align: center;
-
+  
     position: fixed;
     bottom: 10px;
     left: calc(50% - 6ch);
     z-index: 999;
     font-size: 20px;
     color: gray;
-}
+  }
+  
+  #look-object-btn, #look-cursor-btn {
+    top: 0;
+    left: 0;
+    padding: 10px;
+    border-bottom-right-radius: 5px;
+  
+    color: white;
+    background-color: black;
+  }
+  
+  #draggable-object {
+    display: none;
+    width: 54px;
+    height: 54px;
+    position: absolute;
+    z-index: 1000;
+    cursor: grab;
+  }
+  
+  #fullscreen-btn {
+    top: 10px;
+    right: 37px;
+  }
+  

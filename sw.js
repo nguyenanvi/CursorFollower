@@ -5,6 +5,7 @@ const FILES_TO_CACHE = [
     '/styles.css',
     '/script.js',
     '/img/fullscreen.ico',
+    '/img/draggable.webp',
     '/img/11.jpeg',
     '/img/12.jpeg',
     '/img/13.jpeg',
